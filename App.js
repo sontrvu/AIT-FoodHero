@@ -6,13 +6,6 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
       <StatusBar style="auto" />
     </View>
   );
