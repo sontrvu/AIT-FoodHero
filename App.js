@@ -6,6 +6,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Hey Simone do you see this text</Text>
+      {/* KASDFkjoasndfjknasfkn k */}
       <StatusBar style="auto" />
     </View>
   );
