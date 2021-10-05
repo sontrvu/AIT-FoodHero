@@ -7,6 +7,8 @@ export default function App() {
     <View style={styles.container}>
       <Text>Hey Simone do you see this text</Text>
       {/* KASDFkjoasndfjknasfkn k */}
+      <Text>Hey Simone do you see this</Text>
+      <Text>Hey Simone do you see this</Text>
       <StatusBar style="auto" />
     </View>
   );
