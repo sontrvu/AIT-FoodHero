@@ -13,14 +13,6 @@ export default function App() {
       {/* Hello world, please */}
       {/* Hello world, please */}
       {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
-      {/* Hello world, please */}
       <StatusBar style="auto" />
     </View>
   );
