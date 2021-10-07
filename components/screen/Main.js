@@ -10,8 +10,15 @@ function Main(props) {
         <View>
             <MainHeader />
 
-            <Text>Hello</Text>
-            
+            <View style={{backgroundColor: 'red', height: 100, flexDirection: 'row'}}>
+                <View style={{backgroundColor: 'blue', flex: 1 }}>
+
+                </View>
+                <View style={{backgroundColor: 'purple', flex: 2 }}>
+
+                </View>
+            </View>
+
         </View>
     );
 }
