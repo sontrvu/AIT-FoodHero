@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import LoginStyle from '../view/LoginStyle';
 
-function Login(props) {
+
+function Login({navigation}) {
+
+    
     return (
         <View>
             <LoginStyle/>
+            
         </View>
     );
 }
