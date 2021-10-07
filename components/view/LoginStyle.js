@@ -7,23 +7,21 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 function LoginStyle(props) {
     return (
         <View>
-            <View>
-                <View style={styles.headerContainer}>
-                    <Text style={styles.loginTextHeader}>Login</Text>
-                    <Text style={styles.loginText}>Please sign in to continue</Text>
-                </View>
-                    
-                <View style={styles.bodyContainer}>
-                    <Text style={styles.text}>Email</Text>
-                    <TextInput style={styles.input} placeholder="Enter your email"></TextInput>
-                    <Text style={styles.text}>Password</Text>
-                    <TextInput style={styles.input} placeholder="Enter your password"></TextInput>
-
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Login  <FontAwesome5 name="arrow-alt-circle-right" size={24} color="black" /></Text>
-                    </TouchableOpacity>
-                </View>     
+            <View style={styles.headerContainer}>
+                <Text style={styles.loginTextHeader}>Login</Text>
+                <Text style={styles.loginText}>Please sign in to continue</Text>
             </View>
+                
+            <View style={styles.bodyContainer}>
+                <Text style={styles.text}>Email</Text>
+                <TextInput style={styles.input} placeholder="Enter your email"></TextInput>
+                <Text style={styles.text}>Password</Text>
+                <TextInput style={styles.input} placeholder="Enter your password"></TextInput>
+
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Login  <FontAwesome5 name="arrow-alt-circle-right" size={24} color="black" /></Text>
+                </TouchableOpacity>
+            </View>     
 
 
 
