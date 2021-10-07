@@ -11,16 +11,18 @@ function LoginStyle(props) {
                 <Text style={styles.loginTextHeader}>Login</Text>
                 <Text style={styles.loginText}>Please sign in to continue</Text>
             </View>
-            <View>
+                
+            <View style={styles.bodyContainer}>
                 <Text style={styles.text}>Email</Text>
                 <TextInput style={styles.input} placeholder="Enter your email"></TextInput>
                 <Text style={styles.text}>Password</Text>
                 <TextInput style={styles.input} placeholder="Enter your password"></TextInput>
-            </View>
-        
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Login {'>'}</Text>
+                </TouchableOpacity>
+            </View>     
+            <View style={styles.footer}></View>      
             
         </View>
     );
@@ -36,7 +38,12 @@ const styles=StyleSheet.create({
         borderBottomRightRadius:50,
         borderColor:AppConstant.COLOR_PRIMARY,
         padding:20,
-        maxWidth:300,
+        maxWidth:250,
+    },
+    bodyContainer:{
+        marginTop:50,
+        display:'flex',
+        paddingHorizontal:20,
     },
     loginTextHeader:{
         fontSize:35,
@@ -44,36 +51,50 @@ const styles=StyleSheet.create({
         color:AppConstant.COLOR_PRIMARY,
     },
     loginText:{
-        fontSize:20,
+        fontSize:15,
         color:AppConstant.COLOR_PRIMARY,
     },
     text:{
         fontSize:20,
         color:AppConstant.COLOR_PRIMARY,
         fontWeight:'bold',
+        marginBottom:5,
+        marginLeft:15,
     },
     input:{
         height:50,
         backgroundColor:"#E0E0E0",
-        width:300,
+        width:320,
         borderRadius:25,
+        paddingLeft:15,
+        fontWeight:'bold',
+        marginBottom:20,
     },
     button:{
         backgroundColor:AppConstant.COLOR_PRIMARY,
-        width:100,
-        height:40,
-        borderRadius:20,
+        width:120,
+        height:50,
+        borderRadius:25,
         display:'flex',
         alignItems:'center',
-        padding:5,
+        padding:10,
+        marginTop:50,
+        alignSelf:'flex-end',
     },
     buttonText:{
-        fontSize:20,
+        fontSize:18,
         color:"#E0E0E0",
+        fontWeight:'bold',
+    },
+    footer:{
+        backgroundColor:AppConstant.COLOR_PRIMARY,
+        height:50,
+        width:200,
+        borderTopLeftRadius:35,
+        alignSelf:'flex-end',
+        marginTop:120,
 
     }
-
-
 
 });
 
