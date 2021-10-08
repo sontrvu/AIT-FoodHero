@@ -27,7 +27,7 @@ function LoginStyle() {
                 <TextInput style={styles.input} placeholder="Enter your email"></TextInput>
                 <Text style={styles.text}>Password</Text>
                 <TextInput style={styles.input} placeholder="Enter your password"></TextInput>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Main")}>
                     <Text style={styles.buttonText}>Login  <FontAwesome5 name="arrow-alt-circle-right" size={24} color="black" /></Text>
                 </TouchableOpacity>
             </View>     
