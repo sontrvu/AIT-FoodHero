@@ -2,7 +2,7 @@ import React from 'react'
 import { Text,View, StyleSheet,TextInput,Button,TouchableOpacity } from 'react-native'
 import * as AppConstant from "../../helpers/appConstant";
 import Constants from 'expo-constants';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5,MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 function Signup() {
@@ -25,7 +25,8 @@ function Signup() {
                 <Text style={styles.text}>Password</Text>
                 <TextInput style={styles.input} placeholder="Enter your password"></TextInput>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Main")}>
-                    <Text style={styles.buttonText}>Singup  <FontAwesome5 name="arrow-alt-circle-right" size={24} color="black" /></Text>
+                    <Text style={styles.buttonText}>Singup</Text>
+                    <MaterialIcons name="keyboard-arrow-right" size={22} color="white"/>
                 </TouchableOpacity>
             </View>
             <View style={styles.footer}>
@@ -98,7 +99,9 @@ const styles=StyleSheet.create({
         height:50,
         borderRadius:25,
         display:'flex',
+        flexDirection:'row',
         alignItems:'center',
+        justifyContent:'center',
         padding:10,
         marginTop:30,
         alignSelf:'flex-end',

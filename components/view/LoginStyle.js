@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import * as AppConstant from "../../helpers/appConstant";
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Constants from 'expo-constants';
 import { useNavigation } from '@react-navigation/native';
@@ -28,7 +28,8 @@ function LoginStyle() {
                 <Text style={styles.text}>Password</Text>
                 <TextInput style={styles.input} placeholder="Enter your password"></TextInput>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Main")}>
-                    <Text style={styles.buttonText}>Login  <FontAwesome5 name="arrow-alt-circle-right" size={24} color="black" /></Text>
+                    <Text style={styles.buttonText}>Login </Text>
+                    <MaterialIcons name="keyboard-arrow-right" size={22} color="white"/>
                 </TouchableOpacity>
             </View>     
             <Text style={styles.signUpBtn} onPress={() => navigation.navigate("Signup")}>Not registered, signup</Text>
@@ -41,12 +42,10 @@ function LoginStyle() {
 const styles=StyleSheet.create({
     mainContainer:{
         marginTop: Constants.statusBarHeight,
-        //flex:1,
-        //flexDirection:'column',
-        //backgroundColor:"red",
+        flex:1,
     },
     headerContainer:{
-        marginTop:25,
+        flex:1,
         borderStyle:'solid',
         borderLeftWidth:0,
         borderWidth:3,
@@ -55,14 +54,14 @@ const styles=StyleSheet.create({
         borderColor:AppConstant.COLOR_PRIMARY,
         padding:20,
         maxWidth:250,
-        //flex:1,
-        //backgroundColor:"red",
+        maxHeight:110,
+        marginTop:25,
         //flexDirection:"column",
     },
     bodyContainer:{
+        flex:4,
         marginTop:50,
-        //flex:1,
-        display:'flex',
+        //display:'flex',
         paddingHorizontal:20,
         //backgroundColor:"green",
         //flexDirection:"column",
@@ -98,14 +97,16 @@ const styles=StyleSheet.create({
         height:50,
         borderRadius:25,
         display:'flex',
+        flexDirection:"row",
         alignItems:'center',
-        padding:10,
+        justifyContent:'center',
+        //padding:20,
         marginTop:50,
         alignSelf:'flex-end',
         //flex:1,
     },
     buttonText:{
-        fontSize:16,
+        fontSize:18,
         color:"#E0E0E0",
         fontWeight:'bold',
     },
@@ -125,7 +126,7 @@ const styles=StyleSheet.create({
         width:200,
         borderTopLeftRadius:35,
         alignSelf:'flex-end',
-        marginTop:100,
+        //marginTop:100,
     }
 
 });
