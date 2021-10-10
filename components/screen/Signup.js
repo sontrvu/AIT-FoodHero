@@ -41,6 +41,7 @@ const styles=StyleSheet.create({
     mainContainer:{
         marginTop: Constants.statusBarHeight,
         flex:1,
+        backgroundColor:"black",
     },
     header:{
         flex:1,
@@ -54,11 +55,12 @@ const styles=StyleSheet.create({
         maxWidth:250,
         maxHeight:110,
         marginTop:25,
+        backgroundColor:"red",
     },
     body:{
-        flex:3.5,
+        flex:1,//flex:3.5,
         paddingHorizontal:20,
-        marginTop:10,
+        backgroundColor:"green",
     },
     footer:{
         height:50,

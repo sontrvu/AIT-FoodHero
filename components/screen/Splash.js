@@ -13,7 +13,7 @@ export default class Splash extends Component{
         //method that gets called after a component is mounted
         setTimeout (() =>{
             this.props.navigation.navigate("Login");
-        }, 2000)
+        }, 500)
     }
     render()
     {
