@@ -6,9 +6,8 @@ import { Alert, Button, View, Text } from 'react-native';
 
 import MainScreen from './components/screen/Main'
 import LoginScreen from './components/screen/Login'
-import SignupScreen from './components/screen/Signup';
+import SignupScreen from './components/screen/Signup'
 import SplashScreen from './components/screen/Splash'
-
 
 const Stack = createStackNavigator();
 
