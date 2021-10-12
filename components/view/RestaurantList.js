@@ -6,7 +6,9 @@ import {
   View,
   FlatList,
   Image,
+  TouchableOpacity,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import * as AppConstant from '../../helpers/appConstant';
 
 const DATA = [
@@ -51,8 +53,14 @@ export default function RestaurantList({ title }) {
 }
 
 function Item({ itemData }) {
+  const navigation = useNavigation();
+  const onPress = () => {
+    navigation.navigate('RestaurantDetail');
+  };
+
   return (
-    <View style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={onPress}>
+      {/* <View style={styles.item}> */}
       <Image
         style={styles.itemImage}
         source={{
@@ -69,7 +77,7 @@ function Item({ itemData }) {
           <Text style={styles.itemDistance}>{itemData.distance}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
