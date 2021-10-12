@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Constants from 'expo-constants';
 import { useNavigation } from '@react-navigation/native';
 
+
 function Login() {
 
     const navigation = useNavigation();
@@ -52,7 +53,7 @@ const styles=StyleSheet.create({
         flex:1,
         height:"100%",
         width:"100%",
-        backgroundColor:"black",
+        //backgroundColor:"black",
     },
     headerContainer:{
         flex:1,
@@ -66,7 +67,7 @@ const styles=StyleSheet.create({
         maxWidth:250,
         maxHeight:110,
         marginTop:25,
-        backgroundColor:"red",
+        //backgroundColor:"red",
     },
     bodyContainer:{
         flex:2,
@@ -74,7 +75,7 @@ const styles=StyleSheet.create({
         display:'flex',
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:"green",
+        //backgroundColor:"green",
     },
     loginTextHeader:{
         fontSize:35,
@@ -104,7 +105,7 @@ const styles=StyleSheet.create({
     loginBtnContainer:{
         flex:1,
         justifyContent:'center',
-        backgroundColor:"purple",
+        //backgroundColor:"purple",
     },
     loginBtn:{
         backgroundColor:AppConstant.COLOR_PRIMARY,
@@ -125,7 +126,7 @@ const styles=StyleSheet.create({
     },
     signUpBtnContainer:{
         flex:1,
-        backgroundColor:"blue",
+        //backgroundColor:"blue",
     },
     signUpBtn:{
         fontSize:15,

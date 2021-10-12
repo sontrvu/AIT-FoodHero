@@ -25,7 +25,7 @@ function Signup() {
                 <Text style={styles.text}>Password</Text>
                 <TextInput style={styles.input} placeholder="Enter your password"></TextInput>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Main")}>
-                    <Text style={styles.buttonText}>Singup</Text>
+                    <Text style={styles.buttonText}>Sing up</Text>
                     <MaterialIcons name="keyboard-arrow-right" size={22} color="white"/>
                 </TouchableOpacity>
             </View>
@@ -41,7 +41,7 @@ const styles=StyleSheet.create({
     mainContainer:{
         marginTop: Constants.statusBarHeight,
         flex:1,
-        backgroundColor:"black",
+        //backgroundColor:"black",
     },
     header:{
         flex:1,
@@ -55,12 +55,12 @@ const styles=StyleSheet.create({
         maxWidth:250,
         maxHeight:110,
         marginTop:25,
-        backgroundColor:"red",
+        //backgroundColor:"red",
     },
     body:{
         flex:1,//flex:3.5,
         paddingHorizontal:20,
-        backgroundColor:"green",
+        //backgroundColor:"green",
     },
     footer:{
         height:50,
