@@ -24,7 +24,7 @@ function Signup() {
                 <TextInput style={styles.input} placeholder="Enter your email"></TextInput>
                 <Text style={styles.text}>Password</Text>
                 <TextInput style={styles.input} placeholder="Enter your password"></TextInput>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Home")}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Main")}>
                     <Text style={styles.buttonText}>Sing up</Text>
                     <MaterialIcons name="keyboard-arrow-right" size={22} color="white"/>
                 </TouchableOpacity>

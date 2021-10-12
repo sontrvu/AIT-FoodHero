@@ -32,7 +32,7 @@ function Login() {
                 </View>
             </View>
             <View style={styles.loginBtnContainer}>
-                <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate("Home")}>
+                <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate("Main")}>
                     <Text style={styles.buttonText}>Login </Text>
                     <MaterialIcons name="keyboard-arrow-right" size={22} color="white"/>
                 </TouchableOpacity>
