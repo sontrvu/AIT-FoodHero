@@ -1,9 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import * as AppConstant from '../../helpers/appConstant';
 import { FontAwesome5, Entypo } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function NavigationHeader({ title }) {
+  const navigation = useNavigation();
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.topBar}>
       <View style={{ flexDirection: 'row' }}>
@@ -14,7 +26,9 @@ export default function NavigationHeader({ title }) {
             justifyContent: 'center',
           }}
         >
-          <Entypo name="chevron-thin-left" size={35} color="white" />
+          <TouchableOpacity onPress={handleGoBack}>
+            <Entypo name="chevron-thin-left" size={35} color="white" />
+          </TouchableOpacity>
         </View>
         <View
           style={{
