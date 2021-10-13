@@ -60,7 +60,6 @@ function Item({ itemData }) {
 
   return (
     <TouchableOpacity style={styles.item} onPress={onPress}>
-      {/* <View style={styles.item}> */}
       <Image
         style={styles.itemImage}
         source={{
