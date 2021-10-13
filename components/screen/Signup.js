@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     mainContainer: {
         marginTop: Constants.statusBarHeight,
         flex: 1,
-        //backgroundColor:"black",
     },
     header: {
         flex: 1,
@@ -55,12 +54,10 @@ const styles = StyleSheet.create({
         maxWidth: 250,
         maxHeight: 110,
         marginTop: 25,
-        //backgroundColor:"red",
     },
     body: {
-        flex: 1,//flex:3.5,
+        flex: 1,
         paddingHorizontal: 20,
-        //backgroundColor:"green",
     },
     footer: {
         height: 50,
@@ -107,7 +104,6 @@ const styles = StyleSheet.create({
         padding: 10,
         marginTop: 30,
         alignSelf: 'flex-end',
-        //flex:1,
     },
     buttonText: {
         fontSize: 16,

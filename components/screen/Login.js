@@ -11,10 +11,6 @@ function Login() {
 
     const navigation = useNavigation();
 
-    {/*const pressHandler =() =>{
-        navigation.navigate("Signup")
-    }*/}
-
     return (
         <View style={styles.mainContainer}>
             <View style={styles.headerContainer}>
@@ -39,7 +35,6 @@ function Login() {
             </View>
             <View style={styles.signUpBtnContainer}>
                 <Text style={styles.signUpBtn} onPress={() => navigation.navigate("Signup")}>Not registered, signup</Text>
-                {/*<Button title="Go to Signup" onPress={pressHandler}/>*/}
             </View>
 
             <View style={styles.footer}></View>
@@ -53,7 +48,6 @@ const styles = StyleSheet.create({
         flex: 1,
         height: "100%",
         width: "100%",
-        //backgroundColor:"black",
     },
     headerContainer: {
         flex: 1,
@@ -67,15 +61,12 @@ const styles = StyleSheet.create({
         maxWidth: 250,
         maxHeight: 110,
         marginTop: 25,
-        //backgroundColor:"red",
     },
     bodyContainer: {
         flex: 2,
-        //marginTop:25,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        //backgroundColor:"green",
     },
     loginTextHeader: {
         fontSize: 35,
@@ -105,7 +96,6 @@ const styles = StyleSheet.create({
     loginBtnContainer: {
         flex: 1,
         justifyContent: 'center',
-        //backgroundColor:"purple",
     },
     loginBtn: {
         backgroundColor: AppConstant.COLOR_PRIMARY,
@@ -126,7 +116,6 @@ const styles = StyleSheet.create({
     },
     signUpBtnContainer: {
         flex: 1,
-        //backgroundColor:"blue",
     },
     signUpBtn: {
         fontSize: 15,

@@ -78,11 +78,9 @@ const styles = StyleSheet.create({
     headerContainer: {
         flex: 1,
         marginTop: 25,
-        //backgroundColor:"purple"
     },
     bodyContainer: {
         flex: 3,
-        //backgroundColor:"green"
     },
     footerContainer: {
         height: 40,
@@ -95,7 +93,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         padding: 15,
-        //backgroundColor:"red",
     },
     options: {
         flex: 1,

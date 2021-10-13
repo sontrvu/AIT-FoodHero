@@ -4,9 +4,6 @@ import * as AppConstant from "../../helpers/appConstant";
 import Constants from 'expo-constants';
 import LogoImage from "../../assets/logo.png";
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
-
 export default class Splash extends Component {
 
     componentDidMount() {
@@ -19,7 +16,6 @@ export default class Splash extends Component {
         return (
             <View style={styles.splash}>
                 <View style={styles.imageContainer}>
-                    {/* <Image source={require("./assets/logo.png")} /> */}
                     <Image style={styles.image} source={LogoImage}></Image>
                 </View>
                 <View style={styles.textContainer}>
