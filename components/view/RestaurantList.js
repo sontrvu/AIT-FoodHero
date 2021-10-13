@@ -11,6 +11,8 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import * as AppConstant from '../../helpers/appConstant';
 
+
+
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -53,9 +55,11 @@ export default function RestaurantList({ title }) {
 }
 
 function Item({ itemData }) {
+  
   const navigation = useNavigation();
   const onPress = () => {
-    navigation.navigate('RestaurantDetail');
+    navigation.navigate("Checkout");
+    //navigation.navigate("RestaurantDetail");
   };
 
   return (

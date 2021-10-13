@@ -7,6 +7,7 @@ import MainScreen from './components/screen/Main'
 import LoginScreen from './components/screen/Login'
 import SignupScreen from './components/screen/Signup'
 import SplashScreen from './components/screen/Splash'
+import CheckoutScreen from './components/screen/Checkout'
 
 //import HomeScreen from './components/screen/Home'
 
@@ -20,6 +21,7 @@ export default function App() {
           <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="Checkout" component={CheckoutScreen} options={{ headerShown: false }}/>
        </Stack.Navigator>
     </NavigationContainer>
     
