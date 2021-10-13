@@ -20,7 +20,7 @@ function Login() {
             <View style={styles.headerContainer}>
                 <Text style={styles.loginTextHeader}>Login</Text>
                 <Text style={styles.loginText}>Please login to continue</Text>
-            </View>  
+            </View>
             <View style={styles.bodyContainer}>
                 <View>
                     <Text style={styles.bodyText}>Email</Text>
@@ -34,114 +34,114 @@ function Login() {
             <View style={styles.loginBtnContainer}>
                 <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate("Main")}>
                     <Text style={styles.buttonText}>Login </Text>
-                    <MaterialIcons name="keyboard-arrow-right" size={22} color="white"/>
+                    <MaterialIcons name="keyboard-arrow-right" size={22} color="white" />
                 </TouchableOpacity>
             </View>
             <View style={styles.signUpBtnContainer}>
                 <Text style={styles.signUpBtn} onPress={() => navigation.navigate("Signup")}>Not registered, signup</Text>
                 {/*<Button title="Go to Signup" onPress={pressHandler}/>*/}
-            </View>    
-            
+            </View>
+
             <View style={styles.footer}></View>
         </View>
     );
 }
 
-const styles=StyleSheet.create({
-    mainContainer:{
+const styles = StyleSheet.create({
+    mainContainer: {
         marginTop: Constants.statusBarHeight,
-        flex:1,
-        height:"100%",
-        width:"100%",
+        flex: 1,
+        height: "100%",
+        width: "100%",
         //backgroundColor:"black",
     },
-    headerContainer:{
-        flex:1,
-        borderStyle:'solid',
-        borderLeftWidth:0,
-        borderWidth:3,
-        borderTopRightRadius:50,
-        borderBottomRightRadius:50,
-        borderColor:AppConstant.COLOR_PRIMARY,
-        padding:20,
-        maxWidth:250,
-        maxHeight:110,
-        marginTop:25,
+    headerContainer: {
+        flex: 1,
+        borderStyle: 'solid',
+        borderLeftWidth: 0,
+        borderWidth: 3,
+        borderTopRightRadius: 50,
+        borderBottomRightRadius: 50,
+        borderColor: AppConstant.COLOR_PRIMARY,
+        padding: 20,
+        maxWidth: 250,
+        maxHeight: 110,
+        marginTop: 25,
         //backgroundColor:"red",
     },
-    bodyContainer:{
-        flex:2,
+    bodyContainer: {
+        flex: 2,
         //marginTop:25,
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         //backgroundColor:"green",
     },
-    loginTextHeader:{
-        fontSize:35,
-        fontWeight:'bold',
-        color:AppConstant.COLOR_PRIMARY,
+    loginTextHeader: {
+        fontSize: 35,
+        fontWeight: 'bold',
+        color: AppConstant.COLOR_PRIMARY,
     },
-    loginText:{
-        fontSize:15,
-        color:AppConstant.COLOR_PRIMARY,
+    loginText: {
+        fontSize: 15,
+        color: AppConstant.COLOR_PRIMARY,
     },
-    bodyText:{
-        fontSize:20,
-        color:AppConstant.COLOR_PRIMARY,
-        fontWeight:'bold',
-        marginBottom:5,
-        marginLeft:15,
+    bodyText: {
+        fontSize: 20,
+        color: AppConstant.COLOR_PRIMARY,
+        fontWeight: 'bold',
+        marginBottom: 5,
+        marginLeft: 15,
     },
-    input:{
-        height:50,
-        backgroundColor:"#E0E0E0",
-        width:320,
-        borderRadius:25,
-        paddingLeft:15,
-        fontWeight:'bold',
-        marginBottom:20,
+    input: {
+        height: 50,
+        backgroundColor: "#E0E0E0",
+        width: 320,
+        borderRadius: 25,
+        paddingLeft: 15,
+        fontWeight: 'bold',
+        marginBottom: 20,
     },
-    loginBtnContainer:{
-        flex:1,
-        justifyContent:'center',
+    loginBtnContainer: {
+        flex: 1,
+        justifyContent: 'center',
         //backgroundColor:"purple",
     },
-    loginBtn:{
-        backgroundColor:AppConstant.COLOR_PRIMARY,
-        width:150,
-        height:50,
-        borderRadius:25,
-        display:'flex',
-        flexDirection:"row",
-        alignItems:'center',
-        justifyContent:'center',
-        alignSelf:'flex-end',
-        marginRight:20,
+    loginBtn: {
+        backgroundColor: AppConstant.COLOR_PRIMARY,
+        width: 150,
+        height: 50,
+        borderRadius: 25,
+        display: 'flex',
+        flexDirection: "row",
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'flex-end',
+        marginRight: 20,
     },
-    buttonText:{
-        fontSize:18,
-        color:"#E0E0E0",
-        fontWeight:'bold',
+    buttonText: {
+        fontSize: 18,
+        color: "#E0E0E0",
+        fontWeight: 'bold',
     },
-    signUpBtnContainer:{
-        flex:1,
+    signUpBtnContainer: {
+        flex: 1,
         //backgroundColor:"blue",
     },
-    signUpBtn:{
-        fontSize:15,
-        maxWidth:160,
-        color:AppConstant.COLOR_PRIMARY,
-        alignSelf:'flex-end',
-        padding:2,
-        marginRight:20,
+    signUpBtn: {
+        fontSize: 15,
+        maxWidth: 160,
+        color: AppConstant.COLOR_PRIMARY,
+        alignSelf: 'flex-end',
+        padding: 2,
+        marginRight: 20,
     },
-    footer:{
-        backgroundColor:AppConstant.COLOR_PRIMARY,
-        height:50,
-        width:200,
-        borderTopLeftRadius:35,
-        alignSelf:'flex-end',
+    footer: {
+        backgroundColor: AppConstant.COLOR_PRIMARY,
+        height: 50,
+        width: 200,
+        borderTopLeftRadius: 35,
+        alignSelf: 'flex-end',
     }
 
 });
