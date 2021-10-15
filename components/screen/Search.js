@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, StyleSheet, Text, TextInput, View, Image, TouchableOpacity,Dimensions,useState } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Dimensions, useState } from 'react-native';
 import * as AppConstant from "../../helpers/appConstant";
 import Constants from 'expo-constants';
-import { FontAwesome5,MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import MapView from 'react-native-maps';
 
 
@@ -13,8 +13,8 @@ import MapView from 'react-native-maps';
 //     longitudeDelta: 0.0421,
 //   });
 
-function Search(){
-    return(
+function Search() {
+    return (
         <View style={styles.container}>
             {/* <MapView style={styles.map} />
             region={mapRegion} */}
@@ -23,8 +23,8 @@ function Search(){
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
         marginTop: Constants.statusBarHeight,
     },
     // map:{
