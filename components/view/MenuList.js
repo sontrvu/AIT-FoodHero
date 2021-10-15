@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import * as AppConstant from '../../helpers/appConstant';
 
 const DATA = [
@@ -54,14 +55,19 @@ export default function MenuList() {
 }
 
 function Item({ itemData }) {
+  const navigation = useNavigation();
+  const onPress = () => {
+    navigation.navigate('Checkout');
+  };
+
   return (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Text style={styles.itemName}>{itemData.name}</Text>
         <Text style={styles.itemPrice}>{itemData.price}</Text>
       </View>
       <Text style={styles.itemLongDescription}>{itemData.longDescription}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 

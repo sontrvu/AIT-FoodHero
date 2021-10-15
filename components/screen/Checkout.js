@@ -1,91 +1,129 @@
 import React from 'react';
-import { Button, StyleSheet, Text, TextInput, View,Dimensions } from 'react-native';
-import * as AppConstant from "../../helpers/appConstant";
-import { FontAwesome5, MaterialIcons,MaterialCommunityIcons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import Constants from 'expo-constants';
-import { useNavigation } from '@react-navigation/native';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import * as AppConstant from '../../helpers/appConstant';
+import { AntDesign } from '@expo/vector-icons';
 import NavigationHeader from '../view/NavigationHeader';
 import MapView from 'react-native-maps';
 
-function Checkout(){
+import CheckoutItemList from '../view/CheckoutItemList';
 
-    return(
-        <View style={styles.container}>
-            <NavigationHeader title={"Checkout"}/>
-            <View style={{padding:10,flex:0.5,justifyContent:'space-between',marginBottom:5}}>
-                <Text style={{fontSize:20,marginBottom:5,fontWeight:'bold'}}>Restaurant name</Text>
-                <Text>PICKUP AT</Text>
-                <Text style={{fontWeight:'bold',fontSize:15}}>Restaurant address</Text>
-            </View>
-            <View style={{flex:2.5,margin:10,}}>
-                <View style={{borderWidth:1,borderColor:AppConstant.COLOR_PRIMARY,marginBottom:10}}>
-                    <MapView style={styles.map}/>
-                </View>
-                <View>
-                    <TouchableOpacity style={styles.addNoteBtn}>
-                        <MaterialCommunityIcons name="note-text-outline" size={24} color="black" />
-                        <Text >Add a note</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <View style={{padding:10,flex:2,justifyContent:'center',}}>
-                <Text style={{marginBottom:5}}>YOUR ITEMS</Text>
-                <View style={styles.details}>
-                    <Text style={{fontWeight:'bold'}}>Qty</Text><Text>Item name</Text><Text style={{color:AppConstant.COLOR_PRIMARY,fontWeight:'bold'}}>Amount</Text>
-                </View>
-                <View style={{borderBottomColor: 'black',borderBottomWidth: 1,marginBottom:5}}/>
-                <View style={styles.details}>
-                    <Text style={{fontWeight:'bold'}}>TOTAL</Text><Text style={{color:AppConstant.COLOR_PRIMARY,fontWeight:'bold'}}>Amount</Text>
-                </View>
-            </View>
+function Checkout() {
+  return (
+    <View style={styles.container}>
+      <NavigationHeader title={'Checkout'} />
 
-            <View style={{alignItems:'center', flex:1}}>  
-                <TouchableOpacity style={styles.payNowBtn}>
-                    <Text style={{fontSize:20, padding:10,color:"white"}}>Pay now</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    );
+      {/* Restaurant info */}
+      <View style={styles.restaurantInfoContainer}>
+        <Text style={styles.restaurantName}>Pizza'zz Zaazip</Text>
+        <Text style={styles.pickUpLabel}>PICKUP AT</Text>
+        <Text style={styles.pickUpAddressDetail}>
+          22 Watton st, Werribee, VIC 3030
+        </Text>
+      </View>
+
+      {/* Map View */}
+      <View style={styles.mapViewContainer}>
+        <MapView style={styles.map} />
+        <TouchableOpacity style={styles.addNoteButton}>
+          <AntDesign
+            name="filetext1"
+            size={18}
+            color="black"
+            style={styles.addNoteButtonIcon}
+          />
+          <Text style={styles.addNoteButtonTitle}>Add a note</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Check out detail */}
+      <View style={styles.checkOutDetailContainer}>
+        <CheckoutItemList />
+      </View>
+
+      {/* Pay button */}
+      <View style={styles.payNowButtonContainer}>
+        <TouchableOpacity style={styles.payNowButton}>
+          <Text style={styles.payNowButtonTitle}>Pay Now</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
-
 const styles = StyleSheet.create({
-    container:{
-        marginTop: Constants.statusBarHeight,
-        flex:1
-    },
-    map: {
-        width: "100%",
-        height:"100%",
-        borderRadius:10,
-        borderColor:AppConstant.COLOR_PRIMARY,
-        
-    },
-    details:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        marginBottom:10,
-
-    },
-    addNoteBtn:{
-        borderColor:AppConstant.COLOR_PRIMARY,
-        alignSelf:'flex-end',
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'space-between',
-        borderWidth:2,
-        borderRadius:20,
-        padding:5,
-        borderColor:AppConstant.COLOR_PRIMARY,
-    },
-    payNowBtn:{
-        backgroundColor:AppConstant.COLOR_PRIMARY,
-        borderRadius:25,
-        width:300,
-        alignItems:'center',
-
-    }
-
+  container: {
+    // marginTop: Constants.statusBarHeight,
+    flex: 1,
+  },
+  restaurantInfoContainer: {
+    padding: 10,
+  },
+  restaurantName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  pickUpLabel: {
+    marginTop: 5,
+    fontSize: 12,
+  },
+  pickUpAddressDetail: {
+    fontWeight: 'bold',
+  },
+  mapViewContainer: {
+    padding: 10,
+  },
+  map: {
+    width: '100%',
+    height: 240,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: AppConstant.COLOR_PRIMARY,
+  },
+  addNoteButton: {
+    marginTop: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 20,
+    borderColor: AppConstant.COLOR_PRIMARY,
+    alignSelf: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  addNoteButtonIcon: {
+    marginRight: 5,
+  },
+  addNoteButtonTitle: {
+    fontSize: 15,
+  },
+  checkOutDetailContainer: {
+    padding: 10,
+  },
+  checkOutDetailLabel: {
+    fontSize: 12,
+  },
+  payNowButtonContainer: {
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  payNowButton: {
+    padding: 10,
+    backgroundColor: AppConstant.COLOR_PRIMARY,
+    borderRadius: 30,
+    width: '70%',
+    alignItems: 'center',
+  },
+  payNowButtonTitle: {
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });
 export default Checkout;

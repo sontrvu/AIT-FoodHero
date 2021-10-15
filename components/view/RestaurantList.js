@@ -11,8 +11,6 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import * as AppConstant from '../../helpers/appConstant';
 
-
-
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -55,15 +53,13 @@ export default function RestaurantList({ title }) {
 }
 
 function Item({ itemData }) {
-  
   const navigation = useNavigation();
   const onPress = () => {
-    navigation.navigate("Checkout");
-    //navigation.navigate("RestaurantDetail");
+    navigation.navigate('RestaurantDetail');
   };
 
   return (
-    <TouchableOpacity style={styles.item} onPress={onPress}>
+    <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
       <Image
         style={styles.itemImage}
         source={{
@@ -96,7 +92,7 @@ const styles = StyleSheet.create({
   listContainer: {
     marginTop: 10,
   },
-  item: {
+  itemContainer: {
     height: 270,
     width: 320,
     borderColor: 'red',
