@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
 import * as AppConstant from '../../helpers/appConstant';
 import Constants from 'expo-constants';
-import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { firebaseAuth } from '../../managers/firebase';
+import FlashAlert from '../view/FlashAlert';
 
 export default function Signup() {
   const navigation = useNavigation();
@@ -14,17 +15,26 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignUp = () => {
+  const [alertMassage, setAlertMassage] = useState('');
+  const [shouldShowAlert, setShouldShowAlert] = useState(false);
+
+  function showAlert(message) {
+    setAlertMassage(message);
+    setShouldShowAlert(true);
+  }
+
+  function handleSignUp() {
     firebaseAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        // console.log(result);
-        // navigation.navigate('Main');
-      })
-      .then((result) => {
         console.log(result);
+        navigation.navigate('Main');
+      })
+      .catch((result) => {
+        console.log(JSON.stringify(result));
+        showAlert(result.message);
       });
-  };
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -72,12 +82,23 @@ export default function Signup() {
             onChangeText={(text) => setPassword(text)}
           />
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-          <Text style={styles.buttonText}>Sign Up</Text>
-          <MaterialIcons name="keyboard-arrow-right" size={22} color="white" />
-        </TouchableOpacity>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
+            <MaterialIcons name="keyboard-arrow-left" size={22} color="white" />
+
+            <Text style={styles.buttonText}>Back</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+            <MaterialIcons name="keyboard-arrow-right" size={22} color="white" />
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.footer}></View>
+
+      <FlashAlert message={alertMassage} showAlert={shouldShowAlert} onFinished={() => setShouldShowAlert(false)} />
     </View>
   );
 }
@@ -104,6 +125,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20,
     alignItems: 'center',
+    marginHorizontal: 30,
   },
   footer: {
     height: 50,
@@ -122,7 +144,13 @@ const styles = StyleSheet.create({
     color: AppConstant.COLOR_PRIMARY,
   },
   inputContainer: {
-    width: 320,
+    width: '100%',
+  },
+  buttonContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 30,
   },
   text: {
     fontSize: 20,
@@ -150,7 +178,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-    marginTop: 30,
     alignSelf: 'flex-end',
   },
   buttonText: {
