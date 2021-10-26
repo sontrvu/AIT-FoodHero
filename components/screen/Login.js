@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import * as AppConstant from '../../helpers/appConstant';
-import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Constants from 'expo-constants';
 import { useNavigation } from '@react-navigation/native';
-import { firebaseAuth } from '../../app/firebase';
+import Constants from 'expo-constants';
+
+import * as AppConstant from '../../helpers/appConstant';
 import FlashAlert from '../view/FlashAlert';
 
 import { useDispatch, useSelector } from 'react-redux';
-import getUserById from '../../actions/userAction';
+import { loginWithUser } from '../../actions/userAction';
 
 function Login() {
   const navigation = useNavigation();
@@ -28,20 +28,12 @@ function Login() {
   const dispatch = useDispatch();
 
   function handleLogIn() {
-    dispatch(getUserById('Test man'));
+    let data = {
+      email,
+      password,
+    };
 
-    // navigation.navigate('Main');
-
-    // firebaseAuth
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then((result) => {
-    //     console.log(result);
-    //     navigation.navigate('Main');
-    //   })
-    //   .catch((result) => {
-    //     console.log(JSON.stringify(result));
-    //     showAlert(result.message);
-    //   });
+    dispatch(loginWithUser(data));
   }
 
   return (
@@ -73,7 +65,7 @@ function Login() {
       <View style={styles.loginBtnContainer}>
         <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn}>
           <Text style={styles.buttonText}>Login </Text>
-          <MaterialIcons name="keyboard-arrow-right" size={22} color="white" />
+          <MaterialIcons name="keyboard-arrow-right" size={22} color={AppConstant.COLOR_SECONDARY} />
         </TouchableOpacity>
       </View>
       <View style={styles.signUpBtnContainer}>
@@ -158,7 +150,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: '#E0E0E0',
+    color: AppConstant.COLOR_SECONDARY,
     fontWeight: 'bold',
   },
   signUpBtnContainer: {

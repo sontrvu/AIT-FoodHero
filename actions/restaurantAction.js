@@ -6,4 +6,4 @@ const fetchRestaurants = createAsyncThunk('restaurant/fetchRestaurants', async (
   return restaurants;
 });
 
-export default fetchRestaurants;
+export { fetchRestaurants };

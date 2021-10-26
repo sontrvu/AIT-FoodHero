@@ -19,6 +19,7 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 
-const firebaseAuth = firebase.auth();
+const fbAuth = firebase.auth();
+const fbFirestore = firebase.firestore();
 
-export { firebaseAuth };
+export { fbAuth, fbFirestore };

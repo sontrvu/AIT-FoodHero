@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import fetchRestaurants from '../actions/restaurantAction';
+import { fetchRestaurants } from '../actions/restaurantAction';
 
 const initialState = {
   restaurants: [],

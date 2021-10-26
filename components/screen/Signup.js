@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
-import * as AppConstant from '../../helpers/appConstant';
-import Constants from 'expo-constants';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { firebaseAuth } from '../../app/firebase';
+import Constants from 'expo-constants';
+
+import * as AppConstant from '../../helpers/appConstant';
 import FlashAlert from '../view/FlashAlert';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../../actions/userAction';
 
 export default function Signup() {
   const navigation = useNavigation();
@@ -14,6 +17,7 @@ export default function Signup() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [alertMassage, setAlertMassage] = useState('');
   const [shouldShowAlert, setShouldShowAlert] = useState(false);
@@ -23,17 +27,17 @@ export default function Signup() {
     setShouldShowAlert(true);
   }
 
+  const dispatch = useDispatch();
+
   function handleSignUp() {
-    firebaseAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(result);
-        navigation.navigate('Main');
-      })
-      .catch((result) => {
-        console.log(JSON.stringify(result));
-        showAlert(result.message);
-      });
+    const data = {
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+
+    dispatch(registerUser(data));
   }
 
   return (
@@ -44,7 +48,7 @@ export default function Signup() {
       </View>
       <View style={styles.body}>
         <View style={styles.inputContainer}>
-          <Text style={styles.text}>Name</Text>
+          <Text style={styles.inputTitle}>First Name</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter your name"
@@ -54,7 +58,7 @@ export default function Signup() {
         </View>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.text}>Surname</Text>
+          <Text style={styles.inputTitle}>Last Name</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter your surname"
@@ -64,7 +68,7 @@ export default function Signup() {
         </View>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.text}>Email</Text>
+          <Text style={styles.inputTitle}>Email</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter your email"
@@ -74,7 +78,7 @@ export default function Signup() {
         </View>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.text}>Password</Text>
+          <Text style={styles.inputTitle}>Password</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter your password"
@@ -83,16 +87,25 @@ export default function Signup() {
           />
         </View>
 
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm your password"
+            value={confirmPassword}
+            onChangeText={(text) => setConfirmPassword(text)}
+          />
+        </View>
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
-            <MaterialIcons name="keyboard-arrow-left" size={22} color="white" />
+            <MaterialIcons name="keyboard-arrow-left" size={22} color={AppConstant.COLOR_SECONDARY} />
 
             <Text style={styles.buttonText}>Back</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={handleSignUp}>
             <Text style={styles.buttonText}>Sign Up</Text>
-            <MaterialIcons name="keyboard-arrow-right" size={22} color="white" />
+            <MaterialIcons name="keyboard-arrow-right" size={22} color={AppConstant.COLOR_SECONDARY} />
           </TouchableOpacity>
         </View>
       </View>
@@ -145,6 +158,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: '100%',
+    marginTop: 10,
   },
   buttonContainer: {
     width: '100%',
@@ -152,12 +166,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 30,
   },
-  text: {
-    fontSize: 20,
+  inputTitle: {
+    fontSize: 18,
     color: AppConstant.COLOR_PRIMARY,
     fontWeight: 'bold',
-    marginBottom: 5,
-    marginTop: 5,
     marginLeft: 15,
   },
   input: {
@@ -166,7 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingLeft: 15,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginTop: 5,
   },
   button: {
     backgroundColor: AppConstant.COLOR_PRIMARY,
@@ -182,7 +194,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    color: '#E0E0E0',
+    color: AppConstant.COLOR_SECONDARY,
     fontWeight: 'bold',
   },
 });
