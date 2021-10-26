@@ -4,7 +4,7 @@ import * as AppConstant from '../../helpers/appConstant';
 import Constants from 'expo-constants';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { firebaseAuth } from '../../managers/firebase';
+import { firebaseAuth } from '../../app/firebase';
 import FlashAlert from '../view/FlashAlert';
 
 export default function Signup() {

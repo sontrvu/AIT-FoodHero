@@ -5,8 +5,11 @@ import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Constants from 'expo-constants';
 import { useNavigation } from '@react-navigation/native';
-import { firebaseAuth } from '../../managers/firebase';
+import { firebaseAuth } from '../../app/firebase';
 import FlashAlert from '../view/FlashAlert';
+
+import { useDispatch, useSelector } from 'react-redux';
+import getUserById from '../../actions/userAction';
 
 function Login() {
   const navigation = useNavigation();
@@ -22,17 +25,23 @@ function Login() {
     setShouldShowAlert(true);
   }
 
+  const dispatch = useDispatch();
+
   function handleLogIn() {
-    firebaseAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(result);
-        navigation.navigate('Main');
-      })
-      .catch((result) => {
-        console.log(JSON.stringify(result));
-        showAlert(result.message);
-      });
+    dispatch(getUserById('Test man'));
+
+    // navigation.navigate('Main');
+
+    // firebaseAuth
+    //   .signInWithEmailAndPassword(email, password)
+    //   .then((result) => {
+    //     console.log(result);
+    //     navigation.navigate('Main');
+    //   })
+    //   .catch((result) => {
+    //     console.log(JSON.stringify(result));
+    //     showAlert(result.message);
+    //   });
   }
 
   return (

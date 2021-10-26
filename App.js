@@ -10,46 +10,25 @@ import SplashScreen from './components/screen/Splash';
 import CheckoutScreen from './components/screen/Checkout';
 import RestaurantDetail from './components/screen/RestaurantDetail';
 
-//import HomeScreen from './components/screen/Home'
+import { Provider } from 'react-redux';
+import store from './app/store';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash">
-        <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Signup"
-          component={SignupScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Main"
-          component={MainScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="RestaurantDetail"
-          component={RestaurantDetail}
-          options={{ headerShown: false }}
-        />
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Splash">
+          <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="RestaurantDetail" component={RestaurantDetail} options={{ headerShown: false }} />
 
-        <Stack.Screen
-          name="Checkout"
-          component={CheckoutScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen name="Checkout" component={CheckoutScreen} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
