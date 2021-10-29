@@ -1,12 +1,32 @@
 # AIT FoodHero
 
-#### A message to the shareholders:
+
 
 ---
+## Description
 
-<img src="https://media.giphy.com/media/t2eBr71ACeDC0/giphy.gif" width="600"/> 
 
 ---
+## Usage
+
+---
+## Installation
+
+---
+## Contributors
+
+---
+## Guides and Resources
+
+---
+## API
+
+---
+## License
+
+You can view our license [here](https://github.com/sharryv/AIT-FoodHero/blob/master/Licence.txt)
+
+
 
 
 
