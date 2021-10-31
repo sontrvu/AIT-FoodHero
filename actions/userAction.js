@@ -39,4 +39,8 @@ const registerUser = createAsyncThunk('user/registerUser', async (data, thunkAPI
   return payload;
 });
 
-export { loginWithUser, registerUser };
+const logoutWithUser = createAsyncThunk('user/logoutWithUser', async (data, thunkAPI) => {
+  return {};
+});
+
+export { loginWithUser, registerUser, logoutWithUser };

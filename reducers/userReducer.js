@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginWithUser, registerUser } from '../actions/userAction';
+import { loginWithUser, registerUser, logoutWithUser } from '../actions/userAction';
 
 const initialState = {
   user: {},
@@ -15,6 +15,10 @@ const userReducer = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(loginWithUser.fulfilled, (state, action) => {
+      state.requestId = action.meta.requestId;
+      state.error = false;
+      state.user = action.payload;
+
       /*  action = {
         "meta": Object {
           "arg": Object {
@@ -29,13 +33,14 @@ const userReducer = createSlice({
         "type": "user/getUserById/fulfilled",
       } */
 
-      state.requestId = action.meta.requestId;
-      state.error = false;
-
       console.log(action.payload);
     });
 
     builder.addCase(loginWithUser.rejected, (state, action) => {
+      state.requestId = action.meta.requestId;
+      state.error = true;
+      state.errorMessage = action.error.message;
+
       /* action = {
         "error": Object {
           "message": "NO",
@@ -54,6 +59,18 @@ const userReducer = createSlice({
         "type": "user/getUserById/rejected",
       } */
 
+      console.log(action.error.message);
+    });
+
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      state.requestId = action.meta.requestId;
+      state.error = false;
+      state.user = action.payload;
+
+      console.log(action.payload);
+    });
+
+    builder.addCase(registerUser.rejected, (state, action) => {
       state.requestId = action.meta.requestId;
       state.error = true;
       state.errorMessage = action.error.message;
@@ -61,18 +78,10 @@ const userReducer = createSlice({
       console.log(action.error.message);
     });
 
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      console.log('\nREGISTER');
-      console.log(action.payload);
+    builder.addCase(logoutWithUser.fulfilled, (state, action) => {
+      state.requestId = action.meta.requestId;
       state.error = false;
-    });
-
-    builder.addCase(registerUser.rejected, (state, action) => {
-      console.log('\nREGISTER ERROR');
-      console.log(action.error.message);
-
-      state.error = true;
-      state.errorMessage = action.error.message;
+      state.user = action.payload;
     });
   },
 });

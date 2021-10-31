@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -13,6 +13,9 @@ import { registerUser } from '../../actions/userAction';
 export default function Signup() {
   const navigation = useNavigation();
 
+  const { requestId, user, loading, error, errorMessage } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -22,12 +25,16 @@ export default function Signup() {
   const [alertMassage, setAlertMassage] = useState('');
   const [shouldShowAlert, setShouldShowAlert] = useState(false);
 
+  useEffect(() => {
+    if (error) {
+      showAlert(errorMessage);
+    }
+  }, [requestId]);
+
   function showAlert(message) {
     setAlertMassage(message);
     setShouldShowAlert(true);
   }
-
-  const dispatch = useDispatch();
 
   function handleSignUp() {
     const data = {
