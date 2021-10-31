@@ -109,7 +109,7 @@ export default function Signup() {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.footer}></View>
+      <View style={styles.footer} />
 
       <FlashAlert message={alertMassage} showAlert={shouldShowAlert} onFinished={() => setShouldShowAlert(false)} />
     </View>
@@ -141,11 +141,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   footer: {
-    height: 50,
     backgroundColor: AppConstant.COLOR_PRIMARY,
+    position: 'absolute',
+    height: 100,
     width: 200,
-    borderTopLeftRadius: 35,
-    alignSelf: 'flex-end',
+    bottom: -50,
+    right: 0,
+    borderTopLeftRadius: 50,
   },
   loginTextHeader: {
     fontSize: 35,

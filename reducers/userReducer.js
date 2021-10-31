@@ -4,6 +4,9 @@ import { loginWithUser, registerUser } from '../actions/userAction';
 const initialState = {
   user: {},
   loading: false,
+  error: false,
+  errorMessage: '',
+  requestId: '',
 };
 
 const userReducer = createSlice({
@@ -26,6 +29,9 @@ const userReducer = createSlice({
         "type": "user/getUserById/fulfilled",
       } */
 
+      state.requestId = action.meta.requestId;
+      state.error = false;
+
       console.log(action.payload);
     });
 
@@ -47,17 +53,26 @@ const userReducer = createSlice({
         "payload": undefined,
         "type": "user/getUserById/rejected",
       } */
+
+      state.requestId = action.meta.requestId;
+      state.error = true;
+      state.errorMessage = action.error.message;
+
       console.log(action.error.message);
     });
 
     builder.addCase(registerUser.fulfilled, (state, action) => {
       console.log('\nREGISTER');
       console.log(action.payload);
+      state.error = false;
     });
 
     builder.addCase(registerUser.rejected, (state, action) => {
       console.log('\nREGISTER ERROR');
       console.log(action.error.message);
+
+      state.error = true;
+      state.errorMessage = action.error.message;
     });
   },
 });

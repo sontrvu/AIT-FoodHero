@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -14,18 +14,25 @@ import { loginWithUser } from '../../actions/userAction';
 function Login() {
   const navigation = useNavigation();
 
+  const { requestId, user, loading, error, errorMessage } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [alertMassage, setAlertMassage] = useState('');
   const [shouldShowAlert, setShouldShowAlert] = useState(false);
 
+  useEffect(() => {
+    if (error) {
+      showAlert(errorMessage);
+    }
+  }, [requestId]);
+
   function showAlert(message) {
     setAlertMassage(message);
     setShouldShowAlert(true);
   }
-
-  const dispatch = useDispatch();
 
   function handleLogIn() {
     let data = {
@@ -70,11 +77,11 @@ function Login() {
       </View>
       <View style={styles.signUpBtnContainer}>
         <Text style={styles.signUpBtn} onPress={() => navigation.navigate('Signup')}>
-          Not registered, signup
+          Not registered? Sign up now
         </Text>
       </View>
 
-      <View style={styles.footer}></View>
+      <View style={styles.footer} />
 
       <FlashAlert message={alertMassage} showAlert={shouldShowAlert} onFinished={() => setShouldShowAlert(false)} />
     </View>
@@ -158,7 +165,7 @@ const styles = StyleSheet.create({
   },
   signUpBtn: {
     fontSize: 15,
-    maxWidth: 160,
+    fontWeight: 'bold',
     color: AppConstant.COLOR_PRIMARY,
     alignSelf: 'flex-end',
     padding: 2,
@@ -166,10 +173,12 @@ const styles = StyleSheet.create({
   },
   footer: {
     backgroundColor: AppConstant.COLOR_PRIMARY,
-    height: 50,
+    position: 'absolute',
+    height: 100,
     width: 200,
-    borderTopLeftRadius: 35,
-    alignSelf: 'flex-end',
+    bottom: -50,
+    right: 0,
+    borderTopLeftRadius: 50,
   },
 });
 
