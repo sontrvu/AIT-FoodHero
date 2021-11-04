@@ -1,15 +1,56 @@
-import React from 'react';
-import { StyleSheet, Text, TextInput, View, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import * as AppConstant from '../../helpers/appConstant';
 import RatingStars from '../view/RatingStars';
 import NavigationHeader from '../view/NavigationHeader';
 import MenuList from '../view/MenuList';
 
-export default function RestaurantDetail(props) {
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMenuItems } from '../../actions/restaurantAction';
+
+export default function RestaurantDetail({ route, navigation }) {
+  const restaurantData = route.params;
+
+  const orderedItemsDict = {};
+  const [totalQuantity, setTotalQuantity] = useState(0);
+
+  const { currentRestaurant } = useSelector((state) => state.restaurant);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('Use effect detail');
+    const data = { restaurantId: restaurantData.id };
+    dispatch(fetchMenuItems(data));
+  }, []);
+
+  const handleCellPressed = (data) => {};
+
+  const handleQuantityUpdated = (itemData, quantity) => {
+    orderedItemsDict[itemData.id] = { ...itemData, quantity };
+
+    // Sum of all quantities in the orderedItemsDict
+    // const totalQty = Object.values(aaa).reduce((acc, item) => {
+    //   return acc + item.quantity;
+    // }, 0);
+
+    // setTotalQuantity(totalQty);
+  };
+
+  const handleCheckoutPressed = () => {
+    const orderedItems = Object.keys(orderedItemsDict).map((key) => orderedItemsDict[key]);
+
+    if (orderedItems.length === 0) {
+      alert('Please select items to checkout');
+      return;
+    }
+
+    navigation.navigate('Checkout', { restaurantData, orderedItems });
+  };
+
   return (
-    <View>
-      <NavigationHeader title={'Header Title'} />
+    <View style={styles.screenContainer}>
+      <NavigationHeader title={restaurantData.title} />
 
       {/* Top cover image */}
       <View style={styles.imageContainer}>
@@ -21,40 +62,50 @@ export default function RestaurantDetail(props) {
         />
       </View>
 
-      <View style={styles.detailContainer}>
-        {/* Restaurent name and categories */}
-        <Text style={styles.restaurantName}>Pizza'zz Zaazip</Text>
-        <Text style={styles.restaurantCatogory}>
-          Food • Drink • Fink • Drood
-        </Text>
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContentContainer}>
+        <View style={styles.detailContainer}>
+          {/* Restaurent name and categories */}
+          <Text style={styles.restaurantName}>{restaurantData.title}</Text>
+          <Text style={styles.restaurantCatogory}>{restaurantData.categories}</Text>
 
-        <RatingStars size={20} style={styles.ratingStars} />
+          <RatingStars size={20} style={styles.ratingStars} />
 
-        {/* Address detail */}
-        <View style={styles.addressContainer}>
-          <Text style={styles.addressLabel}>ADDRESS</Text>
-          <Text style={styles.addressDetail}>
-            22 Watton st, Werribee, VIC 3030
-          </Text>
+          {/* Address detail */}
+          <View style={styles.addressContainer}>
+            <Text style={styles.addressLabel}>ADDRESS</Text>
+            <Text style={styles.addressDetail}>{restaurantData.address}</Text>
+          </View>
+
+          {/* Introduction text */}
+          <View style={styles.introductionContainer}>
+            <Text style={styles.introductionDescription}>{restaurantData.introduction}</Text>
+          </View>
+
+          {/* Menu */}
+          <MenuList
+            style={styles.menuListContainer}
+            data={currentRestaurant.menuItems}
+            onCellPressed={handleCellPressed}
+            onQuantityUpdated={handleQuantityUpdated}
+          />
         </View>
+      </ScrollView>
 
-        {/* Introduction text */}
-        <View style={styles.introductionContainer}>
-          <Text style={styles.introductionDescription}>
-            High-quality, fresh ingredients are important for flavor, and you
-            can also experiment with various toppings to design innovative
-            pizzas.
-          </Text>
-        </View>
-
-        {/* Menu */}
-        <MenuList />
+      {/* Checkout button */}
+      <View style={styles.checkoutButtonContainer}>
+        <TouchableOpacity style={styles.checkoutButton} onPress={handleCheckoutPressed}>
+          <Text style={styles.checkoutButtonTitle}>Check out</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    paddingBottom: 20,
+  },
   imageContainer: {
     height: 200,
     backgroundColor: 'red',
@@ -68,6 +119,7 @@ const styles = StyleSheet.create({
   },
   detailContainer: {
     padding: 10,
+    flex: 1,
   },
   restaurantName: {
     fontSize: 20,
@@ -100,5 +152,27 @@ const styles = StyleSheet.create({
   },
   introductionDescription: {
     textAlign: 'center',
+  },
+  menuListContainer: {
+    marginTop: 20,
+
+    flex: 1,
+  },
+
+  checkoutButtonContainer: {
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  checkoutButton: {
+    padding: 10,
+    backgroundColor: AppConstant.COLOR_PRIMARY,
+    borderRadius: 30,
+    width: '70%',
+    alignItems: 'center',
+  },
+  checkoutButtonTitle: {
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });

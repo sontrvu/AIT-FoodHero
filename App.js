@@ -27,7 +27,7 @@ export default function App() {
 function Landing() {
   const { requestId, user } = useSelector((state) => state.user);
 
-  console.log('LANDING ' + JSON.stringify(user));
+  // console.log('LANDING ' + JSON.stringify(user));
 
   if (user.token) {
     return (

@@ -1,51 +1,46 @@
-import React from 'react';
-import {
-  Button,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-native';
 import * as AppConstant from '../../helpers/appConstant';
 import { AntDesign } from '@expo/vector-icons';
 import NavigationHeader from '../view/NavigationHeader';
 import MapView from 'react-native-maps';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMenuItems } from '../../actions/restaurantAction';
+
 import CheckoutItemList from '../view/CheckoutItemList';
 
-function Checkout() {
+function Checkout({ route, navigation }) {
+  const { restaurantData, orderedItems } = route.params;
+
+  console.log(JSON.stringify(orderedItems));
+
   return (
     <View style={styles.container}>
       <NavigationHeader title={'Checkout'} />
 
       {/* Restaurant info */}
       <View style={styles.restaurantInfoContainer}>
-        <Text style={styles.restaurantName}>Pizza'zz Zaazip</Text>
+        <Text style={styles.restaurantName}>{restaurantData.title}</Text>
         <Text style={styles.pickUpLabel}>PICKUP AT</Text>
-        <Text style={styles.pickUpAddressDetail}>
-          22 Watton st, Werribee, VIC 3030
-        </Text>
+        <Text style={styles.pickUpAddressDetail}>{restaurantData.address}</Text>
       </View>
 
-      {/* Map View */}
-      <View style={styles.mapViewContainer}>
-        <MapView style={styles.map} />
-        <TouchableOpacity style={styles.addNoteButton}>
-          <AntDesign
-            name="filetext1"
-            size={18}
-            color="black"
-            style={styles.addNoteButtonIcon}
-          />
-          <Text style={styles.addNoteButtonTitle}>Add a note</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContentContainer}>
+        {/* Map View */}
+        <View style={styles.mapViewContainer}>
+          <MapView style={styles.map} />
+          <TouchableOpacity style={styles.addNoteButton}>
+            <AntDesign name="filetext1" size={18} color="black" style={styles.addNoteButtonIcon} />
+            <Text style={styles.addNoteButtonTitle}>Add a note</Text>
+          </TouchableOpacity>
+        </View>
 
-      {/* Check out detail */}
-      <View style={styles.checkOutDetailContainer}>
-        <CheckoutItemList />
-      </View>
+        {/* Check out detail */}
+        <View style={styles.checkOutDetailContainer}>
+          <CheckoutItemList data={orderedItems} />
+        </View>
+      </ScrollView>
 
       {/* Pay button */}
       <View style={styles.payNowButtonContainer}>
@@ -61,6 +56,7 @@ const styles = StyleSheet.create({
   container: {
     // marginTop: Constants.statusBarHeight,
     flex: 1,
+    paddingBottom: 20,
   },
   restaurantInfoContainer: {
     padding: 10,
@@ -105,6 +101,7 @@ const styles = StyleSheet.create({
   },
   checkOutDetailContainer: {
     padding: 10,
+    flex: 1,
   },
   checkOutDetailLabel: {
     fontSize: 12,

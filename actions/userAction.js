@@ -1,42 +1,40 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fbAuth, fbFirestore } from '../app/firebase';
+import { fbAuth } from '../app/firebase';
+import axios from 'axios';
+import * as AppConstant from '../helpers/appConstant';
 
 const loginWithUser = createAsyncThunk('user/getUserById', async (data, thunkAPI) => {
-  const response = await fbAuth.signInWithEmailAndPassword(data.email, data.password);
-  const token = await response.user.getIdToken();
-  const uid = fbAuth.currentUser.uid;
+  const fbResponse = await fbAuth.signInWithEmailAndPassword(data.email, data.password);
+  const token = await fbResponse.user.getIdToken();
 
-  let snapshot = await fbFirestore.collection('users').doc(uid).get();
-  let user = snapshot.data();
+  const response = await axios.request({
+    baseURL: AppConstant.API.baseUrl,
+    url: AppConstant.API.userUrl.userLogin,
+    method: 'POST',
+    data: {
+      ...data,
+      token,
+    },
+  });
 
-  const payload = {
-    ...data,
-    ...user,
-    uid,
-    token,
-  };
-
-  return payload;
+  return response.data;
 });
 
 const registerUser = createAsyncThunk('user/registerUser', async (data, thunkAPI) => {
-  const response = await fbAuth.createUserWithEmailAndPassword(data.email, data.password);
-  const token = await response.user.getIdToken();
-  const uid = fbAuth.currentUser.uid;
+  const fbResponse = await fbAuth.createUserWithEmailAndPassword(data.email, data.password);
+  const token = await fbResponse.user.getIdToken();
 
-  await fbFirestore.collection('users').doc(uid).set({
-    firstName: data.firstName,
-    lastName: data.lastName,
-    email: data.email,
+  const response = await axios.request({
+    baseURL: AppConstant.API.baseUrl,
+    url: AppConstant.API.userUrl.userRegister,
+    method: 'POST',
+    data: {
+      ...data,
+      token,
+    },
   });
 
-  const payload = {
-    ...data,
-    uid,
-    token,
-  };
-
-  return payload;
+  return response.data;
 });
 
 const logoutWithUser = createAsyncThunk('user/logoutWithUser', async (data, thunkAPI) => {

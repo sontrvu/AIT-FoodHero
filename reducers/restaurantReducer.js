@@ -1,8 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchRestaurants } from '../actions/restaurantAction';
+import { fetchRestaurants, fetchMenuItems } from '../actions/restaurantAction';
 
 const initialState = {
-  restaurants: [],
+  restaurantGroups: [],
+  currentRestaurant: {
+    id: '',
+    menuItems: [],
+  },
   loading: false,
 };
 
@@ -11,10 +15,41 @@ const restaurantSlice = createSlice({
   initialState: initialState,
 
   extraReducers: (builder) => {
-    builder.addCase(fetchRestaurants.fulfilled, (state, action) => {
-      // Demo
-      console.log(action.payload);
-    });
+    builder
+      // Fetch restaurant groups
+      .addCase(fetchRestaurants.fulfilled, (state, action) => {
+        state.restaurantGroups = action.payload.data;
+        state.loading = false;
+
+        console.log(action.payload);
+      })
+      .addCase(fetchRestaurants.rejected, (state, action) => {
+        console.log(action.error.message);
+      })
+
+      // Fetch menu items
+      .addCase(fetchMenuItems.pending, (state, action) => {
+        state.currentRestaurant = {
+          id: '',
+          menuItems: [],
+        };
+
+        state.loading = true;
+        console.log(action.payload);
+      })
+      .addCase(fetchMenuItems.fulfilled, (state, action) => {
+        state.currentRestaurant = {
+          id: action.payload.data.restaurantId,
+          menuItems: action.payload.data.menuItems,
+        };
+
+        state.loading = false;
+        console.log(action.payload);
+      })
+      .addCase(fetchMenuItems.rejected, (state, action) => {
+        state.loading = false;
+        console.log(action.error.message);
+      });
   },
 });
 

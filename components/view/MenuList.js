@@ -1,86 +1,81 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import * as AppConstant from '../../helpers/appConstant';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    name: 'Dimsum',
-    longDescription: 'High-quality, fresh ingredients are important',
-    price: '$4.99',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    name: 'Second Item',
-    longDescription: 'For flavor, and you can also experiment with',
-    price: '$5.99',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    name: 'Third Item',
-    longDescription: 'Various toppings to design innovative pizzas.',
-    price: '$6.99',
-  },
-  {
-    id: '58694a0f-3da1-471f-ifjc-145571e29d72',
-    name: '4rd Item Hehehe',
-    longDescription: 'Various toppings to design pizzas innovative toppings.',
-    price: '$8.99',
-  },
-];
-
-export default function MenuList() {
-  const renderItem = ({ item }) => <Item itemData={item} />;
+export default function MenuList({ style, data, onCellPressed, onQuantityUpdated }) {
+  const renderItem = ({ item }) => (
+    <Item itemData={item} onCellPressed={onCellPressed} onQuantityUpdated={onQuantityUpdated} />
+  );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Text style={styles.listTile}>MENU</Text>
       <FlatList
         style={styles.listContainer}
-        data={DATA}
+        data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        bounces={false}
+        nestedScrollEnabled={false}
       />
     </View>
   );
 }
 
-function Item({ itemData }) {
-  const navigation = useNavigation();
-  const onPress = () => {
-    navigation.navigate('Checkout');
+function Item({ itemData, onCellPressed, onQuantityUpdated }) {
+  const [quantity, setQuantity] = useState(0);
+
+  const handleCellPressed = () => {
+    onCellPressed(itemData);
+  };
+
+  const handleDecreasePressed = () => {
+    if (quantity > 0) {
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      onQuantityUpdated(itemData, newQuantity);
+    }
+  };
+
+  const handleIncreasePressed = () => {
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+    onQuantityUpdated(itemData, newQuantity);
   };
 
   return (
-    <TouchableOpacity style={styles.itemContainer} onPress={onPress}>
+    <TouchableOpacity style={styles.itemContainer} onPress={handleCellPressed}>
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Text style={styles.itemName}>{itemData.name}</Text>
-        <Text style={styles.itemPrice}>{itemData.price}</Text>
+        <Text style={styles.itemPrice}>{'$' + itemData.price.toString()}</Text>
       </View>
-      <Text style={styles.itemLongDescription}>{itemData.longDescription}</Text>
+      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', paddingVertical: 5 }}>
+        <Text style={styles.itemLongDescription}>{itemData.longDescription}</Text>
+        <View style={styles.quantityContainer}>
+          <TouchableOpacity style={styles.quantityButton} onPress={handleDecreasePressed}>
+            <Ionicons name="remove-circle-outline" size={24} color="red" />
+          </TouchableOpacity>
+          <Text style={styles.quantityText}>{quantity}</Text>
+          <TouchableOpacity style={styles.quantityButton} onPress={handleIncreasePressed}>
+            <Ionicons name="add-circle-outline" size={24} color="green" />
+          </TouchableOpacity>
+        </View>
+      </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
-  },
+  container: {},
   listTile: {
     fontSize: 12,
   },
-  listContainer: {},
-  itemContainer: {
+  listContainer: {
     marginTop: 15,
+  },
+  itemContainer: {
+    marginBottom: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'gray',
   },
@@ -90,14 +85,33 @@ const styles = StyleSheet.create({
   },
   itemPrice: {
     flex: 1,
+    paddingRight: 3,
     textAlign: 'right',
     fontWeight: 'bold',
     color: AppConstant.COLOR_PRIMARY,
   },
   itemLongDescription: {
-    flex: 1,
     fontSize: 12,
-    paddingTop: 4,
-    paddingBottom: 8,
+    flex: 4,
+  },
+  // itemQuantity: {
+  //   width: 20,
+  //   height: 20,
+  //   borderRadius: 20 / 2,
+
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   backgroundColor: AppConstant.COLOR_HIGHLIGHT,
+  // },
+  // itemQuantityText: {
+  //   fontSize: 12,
+  //   color: 'white',
+  //   fontWeight: '600',
+  // },
+  quantityContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });

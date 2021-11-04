@@ -1,41 +1,9 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, Text, TextInput, View, FlatList, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as AppConstant from '../../helpers/appConstant';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'Dimsum',
-    price: '$5.00',
-    categories: 'Food • Drink',
-    distance: '5km',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-    price: '$5.00',
-    categories: 'Food • Drink',
-    distance: '5km',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-    price: '$5.00',
-    categories: 'Food • Drink',
-    distance: '5km',
-  },
-];
-
-export default function RestaurantList({ title }) {
+export default function RestaurantList({ title, data }) {
   const renderItem = ({ item }) => <Item itemData={item} />;
 
   return (
@@ -43,7 +11,7 @@ export default function RestaurantList({ title }) {
       <Text style={styles.listTile}>{title}</Text>
       <FlatList
         style={styles.listContainer}
-        data={DATA}
+        data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         horizontal={true}
@@ -55,7 +23,7 @@ export default function RestaurantList({ title }) {
 function Item({ itemData }) {
   const navigation = useNavigation();
   const onPress = () => {
-    navigation.navigate('RestaurantDetail');
+    navigation.navigate('RestaurantDetail', itemData);
   };
 
   return (
