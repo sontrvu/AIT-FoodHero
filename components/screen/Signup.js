@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Constants from 'expo-constants';
@@ -37,6 +37,18 @@ export default function Signup() {
   }
 
   function handleSignUp() {
+    if (loading) return;
+
+    if (!email || !password || !firstName || !lastName) {
+      showAlert('Please fill all the fields');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      showAlert('Password and confirm password does not match');
+      return;
+    }
+
     const data = {
       firstName,
       lastName,
@@ -103,18 +115,25 @@ export default function Signup() {
           />
         </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
-            <MaterialIcons name="keyboard-arrow-left" size={22} color={AppConstant.COLOR_SECONDARY} />
+        {loading ? (
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <ActivityIndicator size="small" color={AppConstant.COLOR_SECONDARY} />
+            </View>
+          </View>
+        ) : (
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+              <Text style={styles.buttonText}>Sign Up</Text>
+              <MaterialIcons name="keyboard-arrow-right" size={22} color={AppConstant.COLOR_SECONDARY} />
+            </TouchableOpacity>
 
-            <Text style={styles.buttonText}>Back</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-            <Text style={styles.buttonText}>Sign Up</Text>
-            <MaterialIcons name="keyboard-arrow-right" size={22} color={AppConstant.COLOR_SECONDARY} />
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
+              <MaterialIcons name="keyboard-arrow-left" size={22} color={AppConstant.COLOR_SECONDARY} />
+              <Text style={styles.buttonText}>Back</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
       <View style={styles.footer} />
 
@@ -171,7 +190,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: '100%',
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     justifyContent: 'space-between',
     marginTop: 30,
   },
@@ -191,14 +210,13 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: AppConstant.COLOR_PRIMARY,
-    width: 120,
-    height: 50,
     borderRadius: 25,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
+    paddingVertical: 15,
+    width: '40%',
     alignSelf: 'flex-end',
   },
   buttonText: {

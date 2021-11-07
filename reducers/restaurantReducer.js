@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchRestaurants, fetchMenuItems } from '../actions/restaurantAction';
 
 const initialState = {
@@ -17,6 +17,10 @@ const restaurantSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // Fetch restaurant groups
+      .addCase(fetchRestaurants.pending, (state, action) => {
+        state.restaurantGroups = [];
+        state.loading = true;
+      })
       .addCase(fetchRestaurants.fulfilled, (state, action) => {
         state.restaurantGroups = action.payload.data;
         state.loading = false;
@@ -24,6 +28,7 @@ const restaurantSlice = createSlice({
         console.log(action.payload);
       })
       .addCase(fetchRestaurants.rejected, (state, action) => {
+        state.loading = false;
         console.log(action.error.message);
       })
 

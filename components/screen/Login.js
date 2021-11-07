@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, ActivityIndicator } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -35,6 +35,13 @@ function Login() {
   }
 
   function handleLogIn() {
+    if (loading) return;
+
+    if (!email || !password) {
+      showAlert('Please enter email and password');
+      return;
+    }
+
     let data = {
       email,
       password,
@@ -69,12 +76,20 @@ function Login() {
           ></TextInput>
         </View>
       </View>
+
       <View style={styles.loginBtnContainer}>
         <TouchableOpacity style={styles.loginBtn} onPress={handleLogIn}>
-          <Text style={styles.buttonText}>Login </Text>
-          <MaterialIcons name="keyboard-arrow-right" size={22} color={AppConstant.COLOR_SECONDARY} />
+          {loading ? (
+            <ActivityIndicator size="small" color={AppConstant.COLOR_SECONDARY} />
+          ) : (
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styles.buttonText}>Login</Text>
+              <MaterialIcons name="keyboard-arrow-right" size={22} color={AppConstant.COLOR_SECONDARY} />
+            </View>
+          )}
         </TouchableOpacity>
       </View>
+
       <View style={styles.signUpBtnContainer}>
         <Text style={styles.signUpBtn} onPress={() => navigation.navigate('Signup')}>
           Not registered? Sign up now
@@ -145,8 +160,8 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     backgroundColor: AppConstant.COLOR_PRIMARY,
-    width: 150,
-    height: 50,
+    paddingVertical: 15,
+    width: '35%',
     borderRadius: 25,
     display: 'flex',
     flexDirection: 'row',

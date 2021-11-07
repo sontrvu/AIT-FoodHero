@@ -3,7 +3,7 @@ export const COLOR_SECONDARY = '#EAEBD1';
 export const COLOR_HIGHLIGHT = '#f73d1d';
 
 export const API = {
-  baseUrl: 'http://localhost:5001/ait-foodhero/us-central1/api/',
+  baseUrl: 'http://localhost:5000/ait-foodhero/us-central1/api',
   userUrl: {
     userLogin: 'user/user-login',
     userRegister: 'user/user-register',

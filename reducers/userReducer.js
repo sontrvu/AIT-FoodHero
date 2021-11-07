@@ -14,12 +14,19 @@ const userReducer = createSlice({
   initialState: initialState,
 
   extraReducers: (builder) => {
-    builder.addCase(loginWithUser.fulfilled, (state, action) => {
-      state.requestId = action.meta.requestId;
-      state.error = false;
-      state.user = action.payload;
+    builder
+      .addCase(loginWithUser.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+        state.requestId = action.meta.requestId;
+      })
+      .addCase(loginWithUser.fulfilled, (state, action) => {
+        state.requestId = action.meta.requestId;
+        state.loading = false;
+        state.error = false;
+        state.user = action.payload;
 
-      /*  action = {
+        /*  action = {
         "meta": Object {
           "arg": Object {
             "userId": "Test manz",
@@ -33,15 +40,15 @@ const userReducer = createSlice({
         "type": "user/getUserById/fulfilled",
       } */
 
-      console.log(action.payload);
-    });
+        console.log(action.payload);
+      })
+      .addCase(loginWithUser.rejected, (state, action) => {
+        state.requestId = action.meta.requestId;
+        state.loading = false;
+        state.error = true;
+        state.errorMessage = action.error.message;
 
-    builder.addCase(loginWithUser.rejected, (state, action) => {
-      state.requestId = action.meta.requestId;
-      state.error = true;
-      state.errorMessage = action.error.message;
-
-      /* action = {
+        /* action = {
         "error": Object {
           "message": "NO",
         },
@@ -59,30 +66,37 @@ const userReducer = createSlice({
         "type": "user/getUserById/rejected",
       } */
 
-      console.log(action.error.message);
-    });
+        console.log(action.error.message);
+      })
 
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.requestId = action.meta.requestId;
-      state.error = false;
-      state.user = action.payload;
+      .addCase(registerUser.pending, (state, action) => {
+        state.requestId = action.meta.requestId;
+        state.loading = true;
+        state.error = false;
+        state.errorMessage = '';
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.requestId = action.meta.requestId;
+        state.loading = false;
+        state.error = false;
+        state.user = action.payload;
 
-      console.log(action.payload);
-    });
+        console.log(action.payload);
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.requestId = action.meta.requestId;
+        state.loading = false;
+        state.error = true;
+        state.errorMessage = action.error.message;
 
-    builder.addCase(registerUser.rejected, (state, action) => {
-      state.requestId = action.meta.requestId;
-      state.error = true;
-      state.errorMessage = action.error.message;
+        console.log(action.error.message);
+      })
 
-      console.log(action.error.message);
-    });
-
-    builder.addCase(logoutWithUser.fulfilled, (state, action) => {
-      state.requestId = action.meta.requestId;
-      state.error = false;
-      state.user = action.payload;
-    });
+      .addCase(logoutWithUser.fulfilled, (state, action) => {
+        state.requestId = action.meta.requestId;
+        state.error = false;
+        state.user = action.payload;
+      });
   },
 });
 

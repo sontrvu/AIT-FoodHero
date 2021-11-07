@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, ActivityIndicator } from 'react-native';
 import * as AppConstant from '../../helpers/appConstant';
 
 import MainHeader from '../view/MainHeader';
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchRestaurants } from '../../actions/restaurantAction';
 
 function Main(props) {
-  const { restaurantGroups } = useSelector((state) => state.restaurant);
+  const { restaurantGroups, loading } = useSelector((state) => state.restaurant);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,6 +21,19 @@ function Main(props) {
     return <RestaurantList key={key} title={group.groupTitle} data={group.restaurants} />;
   });
 
+  //   <ScrollView
+  //   style={styles.scrollView}
+  //   contentContainerStyle={styles.scrollViewContentContainer}
+  //   stickyHeaderIndices={[0]}
+  //   bounces={false}
+  // >
+  //   {/* Sticky header */}
+  //   <MainHeader />
+
+  //   {/* Restaurant list */}
+  //   {restaurantGroupsView}
+  // </ScrollView>
+
   return (
     <View>
       <ScrollView
@@ -31,9 +44,13 @@ function Main(props) {
       >
         {/* Sticky header */}
         <MainHeader />
-
-        {/* Restaurant list */}
-        {restaurantGroupsView}
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color={AppConstant.COLOR_PRIMARY} />
+          </View>
+        ) : (
+          restaurantGroupsView
+        )}
       </ScrollView>
     </View>
   );
@@ -43,6 +60,11 @@ const styles = StyleSheet.create({
   scrollView: {},
   scrollViewContentContainer: {
     paddingBottom: 30,
+  },
+  loadingContainer: {
+    marginTop: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
