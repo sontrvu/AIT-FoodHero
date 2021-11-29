@@ -18,11 +18,10 @@ const restaurantSlice = createSlice({
     builder
       // Fetch restaurant groups
       .addCase(fetchRestaurants.pending, (state, action) => {
-        state.restaurantGroups = [];
         state.loading = true;
       })
       .addCase(fetchRestaurants.fulfilled, (state, action) => {
-        state.restaurantGroups = action.payload.data;
+        state.restaurantGroups = action.payload.data.restaurantGroups;
         state.loading = false;
 
         console.log(action.payload);

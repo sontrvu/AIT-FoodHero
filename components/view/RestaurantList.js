@@ -36,12 +36,12 @@ function Item({ itemData }) {
       />
       <View style={styles.itemInfo}>
         <View style={{ flex: 3 }}>
-          <Text style={styles.itemTitle}>{itemData.title}</Text>
+          <Text style={styles.itemTitle}>{itemData.restaurantName}</Text>
           <Text style={styles.itemCategory}>{itemData.categories}</Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={styles.itemPrice}>{itemData.price}</Text>
-          <Text style={styles.itemDistance}>{itemData.distance}</Text>
+          <Text style={styles.itemPrice}>{itemData.price || '$01'}</Text>
+          <Text style={styles.itemDistance}>{itemData.distance || '0km'}</Text>
         </View>
       </View>
     </TouchableOpacity>

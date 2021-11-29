@@ -6,14 +6,37 @@ import NavigationHeader from '../view/NavigationHeader';
 import MapView from 'react-native-maps';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMenuItems } from '../../actions/restaurantAction';
+import { placeOrder } from '../../actions/orderAction';
 
 import CheckoutItemList from '../view/CheckoutItemList';
 
 function Checkout({ route, navigation }) {
   const { restaurantData, orderedItems } = route.params;
 
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   console.log(JSON.stringify(orderedItems));
+
+  // Sum all price of items and convert to string with 2 decimal places
+  const totalPrice = orderedItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  const handleCheckoutPressed = () => {
+    const requestData = {
+      restaurantId: restaurantData.id,
+      customerOrder: {
+        customerId: user.uid,
+        customerName: `${user.firstName} ${user.lastName}`,
+        totalAmount: totalPrice,
+        menuItems: orderedItems,
+      },
+    };
+
+    dispatch(placeOrder(requestData));
+
+    // Alert user that order has been placed
+    alert('Order has been placed');
+  };
 
   return (
     <View style={styles.container}>
@@ -38,13 +61,13 @@ function Checkout({ route, navigation }) {
 
         {/* Check out detail */}
         <View style={styles.checkOutDetailContainer}>
-          <CheckoutItemList data={orderedItems} />
+          <CheckoutItemList data={orderedItems} totalPrice={totalPrice} />
         </View>
       </ScrollView>
 
       {/* Pay button */}
       <View style={styles.payNowButtonContainer}>
-        <TouchableOpacity style={styles.payNowButton}>
+        <TouchableOpacity style={styles.payNowButton} onPress={handleCheckoutPressed}>
           <Text style={styles.payNowButtonTitle}>Pay Now</Text>
         </TouchableOpacity>
       </View>

@@ -27,7 +27,7 @@ function Login() {
     if (error) {
       showAlert(errorMessage);
     }
-  }, [requestId]);
+  }, [requestId, error]);
 
   function showAlert(message) {
     setAlertMassage(message);

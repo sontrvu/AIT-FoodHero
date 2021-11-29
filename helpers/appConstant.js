@@ -12,4 +12,7 @@ export const API = {
     fetchRestaurants: 'restaurant/fetch-restaurants',
     fetchMenuItems: 'restaurant/fetch-menu-items',
   },
+  orderUrl: {
+    placeOrder: 'order/place-order',
+  },
 };

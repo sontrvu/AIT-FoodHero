@@ -3,9 +3,7 @@ import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react
 import { Feather } from '@expo/vector-icons';
 import * as AppConstant from '../../helpers/appConstant';
 
-export default function CheckoutItemList({ data }) {
-  // Sum all price of items and convert to string with 2 decimal places
-  const totalPrice = data.reduce((acc, item) => acc + item.price * item.quantity, 0);
+export default function CheckoutItemList({ data, totalPrice = 0 }) {
   const totalPriceString = '$' + totalPrice.toFixed(2);
 
   const renderItem = ({ item }) => <Item itemData={item} />;
