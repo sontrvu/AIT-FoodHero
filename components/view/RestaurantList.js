@@ -31,7 +31,7 @@ function Item({ itemData }) {
       <Image
         style={styles.itemImage}
         source={{
-          uri: 'https://www.slrlounge.com/wp-content/uploads/2016/03/monikawalecka-1.jpg',
+          uri: itemData.imageUrl || 'https://nantucket.net/wp-content/uploads/2020/09/placeholder-768x512.png',
         }}
       />
       <View style={styles.itemInfo}>

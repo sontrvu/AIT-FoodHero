@@ -50,14 +50,14 @@ export default function RestaurantDetail({ route, navigation }) {
 
   return (
     <View style={styles.screenContainer}>
-      <NavigationHeader title={restaurantData.title} />
+      <NavigationHeader title={restaurantData.restaurantName} />
 
       {/* Top cover image */}
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={{
-            uri: 'https://www.slrlounge.com/wp-content/uploads/2016/03/monikawalecka-1.jpg',
+            uri: restaurantData.imageUrl || 'https://nantucket.net/wp-content/uploads/2020/09/placeholder-768x512.png',
           }}
         />
       </View>
@@ -65,7 +65,7 @@ export default function RestaurantDetail({ route, navigation }) {
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContentContainer}>
         <View style={styles.detailContainer}>
           {/* Restaurent name and categories */}
-          <Text style={styles.restaurantName}>{restaurantData.title}</Text>
+          <Text style={styles.restaurantName}>{restaurantData.restaurantName}</Text>
           <Text style={styles.restaurantCatogory}>{restaurantData.categories}</Text>
 
           <RatingStars size={20} style={styles.ratingStars} />
@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     height: 200,
-    backgroundColor: 'red',
     zIndex: -1,
   },
   image: {

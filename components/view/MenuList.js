@@ -39,10 +39,14 @@ function Item({ itemData, onCellPressed, onQuantityUpdated }) {
   };
 
   const handleIncreasePressed = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    onQuantityUpdated(itemData, newQuantity);
+    if (itemData.maxQuantity && quantity < itemData.maxQuantity) {
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
+      onQuantityUpdated(itemData, newQuantity);
+    }
   };
+
+  const increaseIconColor = itemData.maxQuantity && quantity < itemData.maxQuantity ? 'green' : '#999';
 
   return (
     <TouchableOpacity style={styles.itemContainer} onPress={handleCellPressed}>
@@ -53,12 +57,18 @@ function Item({ itemData, onCellPressed, onQuantityUpdated }) {
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', paddingVertical: 5 }}>
         <Text style={styles.itemLongDescription}>{itemData.longDescription}</Text>
         <View style={styles.quantityContainer}>
-          <TouchableOpacity style={styles.quantityButton} onPress={handleDecreasePressed}>
-            <Ionicons name="remove-circle-outline" size={24} color="red" />
-          </TouchableOpacity>
+          {quantity > 0 ? (
+            <TouchableOpacity style={styles.quantityButton} onPress={handleDecreasePressed}>
+              <Ionicons name="remove-circle-outline" size={24} color="red" />
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.quantityButton} />
+          )}
+
           <Text style={styles.quantityText}>{quantity}</Text>
+
           <TouchableOpacity style={styles.quantityButton} onPress={handleIncreasePressed}>
-            <Ionicons name="add-circle-outline" size={24} color="green" />
+            <Ionicons name="add-circle-outline" size={24} color={increaseIconColor} />
           </TouchableOpacity>
         </View>
       </View>
@@ -113,5 +123,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  quantityButton: {
+    width: 24,
   },
 });

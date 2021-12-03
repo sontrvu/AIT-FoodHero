@@ -36,6 +36,11 @@ function Checkout({ route, navigation }) {
 
     // Alert user that order has been placed
     alert('Order has been placed');
+    navigation.goBack();
+  };
+
+  const handleAddNotePressed = () => {
+    // Ask user to add note
   };
 
   return (
@@ -53,7 +58,7 @@ function Checkout({ route, navigation }) {
         {/* Map View */}
         <View style={styles.mapViewContainer}>
           <MapView style={styles.map} />
-          <TouchableOpacity style={styles.addNoteButton}>
+          <TouchableOpacity style={styles.addNoteButton} onPress={handleAddNotePressed}>
             <AntDesign name="filetext1" size={18} color="black" style={styles.addNoteButtonIcon} />
             <Text style={styles.addNoteButtonTitle}>Add a note</Text>
           </TouchableOpacity>
