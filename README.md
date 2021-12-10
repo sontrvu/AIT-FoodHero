@@ -14,7 +14,7 @@
 
 ## Description <a name="description"></a>
 
-FoodHero is an innovative food-tech startup that will deliver an interactive application for both iOS and Android devices in late November 2021.
+FoodHero is an innovative food-tech startup that will deliver an interactive application for both iOS and Android devices in late December 2021.
 We will be offering customers amazing deals where to pick up food that otherwise would be wasted by restaurants and shops.
 The project also aims to increase the awareness surrounding food waste prevention at the consumer level; a notion that continues to challenge the environmental industry.
 
