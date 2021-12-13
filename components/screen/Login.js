@@ -71,6 +71,7 @@ function Login() {
           <TextInput
             style={styles.input}
             placeholder="Enter your password"
+            secureTextEntry={true}
             value={password}
             onChangeText={(text) => setPassword(text)}
           ></TextInput>
