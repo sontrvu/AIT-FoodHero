@@ -38,6 +38,7 @@ const registerUser = createAsyncThunk('user/registerUser', async (data, thunkAPI
 });
 
 const logoutWithUser = createAsyncThunk('user/logoutWithUser', async (data, thunkAPI) => {
+  await fbAuth.signOut();
   return {};
 });
 

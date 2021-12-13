@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, ScrollView, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, ActivityIndicator, Alert } from 'react-native';
 import * as AppConstant from '../../helpers/appConstant';
 
 import MainHeader from '../view/MainHeader';
@@ -7,6 +7,7 @@ import RestaurantList from '../view/RestaurantList';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRestaurants } from '../../actions/restaurantAction';
+import { logoutWithUser } from '../../actions/userAction';
 
 function Main(props) {
   const { restaurantGroups, loading } = useSelector((state) => state.restaurant);
@@ -34,6 +35,25 @@ function Main(props) {
   //   {restaurantGroupsView}
   // </ScrollView>
 
+  const handleLogout = () => {
+    // Confirm log out alert
+    const alertActions = [
+      {
+        text: 'Cancel',
+        style: 'default',
+      },
+      {
+        text: 'Confirm',
+        style: 'destructive',
+        onPress: () => {
+          dispatch(logoutWithUser());
+        },
+      },
+    ];
+
+    Alert.alert('Log out', 'Are you sure you want to log out?', alertActions, { cancelable: false });
+  };
+
   return (
     <View>
       <ScrollView
@@ -43,7 +63,7 @@ function Main(props) {
         bounces={false}
       >
         {/* Sticky header */}
-        <MainHeader />
+        <MainHeader onRightButtonPressed={handleLogout} />
         {loading ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color={AppConstant.COLOR_PRIMARY} />

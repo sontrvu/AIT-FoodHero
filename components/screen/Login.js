@@ -17,8 +17,8 @@ function Login() {
   const { requestId, user, loading, error, errorMessage } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState('hello@me.me');
-  const [password, setPassword] = useState('123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [alertMassage, setAlertMassage] = useState('');
   const [shouldShowAlert, setShouldShowAlert] = useState(false);
@@ -27,7 +27,7 @@ function Login() {
     if (error) {
       showAlert(errorMessage);
     }
-  }, [requestId, error]);
+  }, [requestId, error, errorMessage]);
 
   function showAlert(message) {
     setAlertMassage(message);

@@ -36,7 +36,11 @@ function Checkout({ route, navigation }) {
 
     // Alert user that order has been placed
     alert('Order has been placed');
-    navigation.goBack();
+
+    // Wait for 2 seconds and then navigate back to home screen
+    setTimeout(() => {
+      navigation.popToTop();
+    }, 2000);
   };
 
   const handleAddNotePressed = () => {

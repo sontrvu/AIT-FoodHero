@@ -61,6 +61,8 @@ const userReducer = createSlice({
       })
 
       .addCase(logoutWithUser.fulfilled, (state, action) => {
+        state.user = {};
+
         state.requestId = action.meta.requestId;
         state.error = false;
         state.user = action.payload;

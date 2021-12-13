@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import * as AppConstant from '../../helpers/appConstant';
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 
-function MainHeader(props) {
+function MainHeader({ onRightButtonPressed }) {
   return (
     <View style={styles.topBar}>
       <View style={{ flexDirection: 'row' }}>
@@ -14,13 +14,9 @@ function MainHeader(props) {
         </View>
 
         {/* Profile button */}
-        <View style={styles.profileIconContainer}>
-          <FontAwesome5
-            name="user-circle"
-            size={35}
-            color={AppConstant.COLOR_SECONDARY}
-          />
-        </View>
+        <TouchableOpacity style={styles.profileIconContainer} onPress={onRightButtonPressed}>
+          <FontAwesome5 name="user-circle" size={35} color={AppConstant.COLOR_SECONDARY} />
+        </TouchableOpacity>
       </View>
 
       {/* Search bar */}
@@ -28,10 +24,7 @@ function MainHeader(props) {
         <View style={styles.searchIconContainer}>
           <Ionicons name="search-outline" size={25} color="gray" />
         </View>
-        <TextInput
-          style={styles.searchBar}
-          placeholder={'Restaurents, fast food, cuisine...'}
-        />
+        <TextInput style={styles.searchBar} placeholder={'Restaurents, fast food, cuisine...'} />
       </View>
     </View>
   );

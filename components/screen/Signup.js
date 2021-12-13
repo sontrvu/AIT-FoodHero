@@ -29,7 +29,7 @@ export default function Signup() {
     if (error) {
       showAlert(errorMessage);
     }
-  }, [requestId]);
+  }, [requestId, error, errorMessage]);
 
   function showAlert(message) {
     setAlertMassage(message);
